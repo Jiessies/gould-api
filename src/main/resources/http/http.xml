@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       default-autowire="byName">
+
+    <bean id="ky.pollingConnectionManager" class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager">
+        <property name="maxTotal" value="${http.pooling.max-totle}"/>
+        <property name="defaultMaxPerRoute" value="${http.pooling.max-per-route}"/>
+    </bean>
+
+    <bean id="ky.httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder" factory-method="create">
+        <property name="connectionManager" ref="ky.pollingConnectionManager"/>
+    </bean>
+
+    <bean id="ky.httpClient" factory-bean="ky.httpClientBuilder" factory-method="build"/>
+
+    <bean id="ky.clientHttpRequestFactoryLong"
+          class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+        <constructor-arg ref="ky.httpClient"/>
+        <property name="connectTimeout" value="${http.timeout.connect}"/>
+        <property name="readTimeout" value="${http.timeout.socket.long}"/>
+        <property name="connectionRequestTimeout" value="${http.timeout.connect.request}"/>
+    </bean>
+
+    <bean id="lRestTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="ky.clientHttpRequestFactoryLong"/>
+    </bean>
+
+    <bean id="ky.clientHttpRequestFactoryShort"
+          class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
+        <constructor-arg ref="ky.httpClient"/>
+        <property name="connectTimeout" value="${http.timeout.connect}"/>
+        <property name="readTimeout" value="${http.timeout.socket.short}"/>
+        <property name="connectionRequestTimeout" value="${http.timeout.connect.request}"/>
+    </bean>
+
+    <bean id="sRestTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="ky.clientHttpRequestFactoryShort"/>
+    </bean>
+
+    <bean id="restTemplate" class="com.ykly.common.utils.YklyRestTemplate">
+        <property name="lRestTemplate" ref="lRestTemplate"/>
+        <property name="sRestTemplate" ref="sRestTemplate"/>
+    </bean>
+
+    <bean id="gouldService" class="com.ykly.service.impl.GouldServiceImpl">
+        <property name="restTemplate" ref="restTemplate"/>
+    </bean>
+</beans>
