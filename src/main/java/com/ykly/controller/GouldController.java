@@ -6,10 +6,7 @@ import com.ykly.entity.request.pathplanning.DistanceMeasurement;
 import com.ykly.service.GouldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -36,5 +33,10 @@ public class GouldController {
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public String getString() {
         return gouldService.getString();
+    }
+    
+    @RequestMapping(value = "/redis/{key}/{value}", method = RequestMethod.GET)
+    public String setRedis(@PathVariable String key, @PathVariable String value) {
+        return gouldService.setRedis(key, value);
     }
 }

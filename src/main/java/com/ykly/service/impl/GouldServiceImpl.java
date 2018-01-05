@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ykly.common.enums.ERetCode;
 import com.ykly.common.enums.OptType;
 import com.ykly.common.logs.FightOpty;
+import com.ykly.common.utils.RedisUtil;
 import com.ykly.common.utils.YklyRestTemplate;
 import com.ykly.entity.ResMsg;
 import com.ykly.entity.request.geocoding.GeoCoding;
@@ -12,6 +13,7 @@ import com.ykly.entity.request.pathplanning.DistanceMeasurement;
 import com.ykly.service.GouldService;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -25,6 +27,9 @@ import java.util.Map;
  */
 @Service
 public class GouldServiceImpl implements GouldService {
+    
+    @Autowired
+    private RedisUtil redisUtil;
     
     private YklyRestTemplate restTemplate;
     
@@ -67,6 +72,19 @@ public class GouldServiceImpl implements GouldService {
     public String getString() {
         String forObject = restTemplate.lGet("https://www.baidu.com/", null, null, new FightOpty(OptType.GOULD_DISTANCE_MEASUREMENT, ""));
         return forObject;
+    }
+    
+    @Override
+    public String setRedis(String key, String value) {
+        String response;
+        redisUtil.set(key,value,1000);
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        response = (String) redisUtil.get(key);
+        return response;
     }
     
     private ResMsg checkParam(BindingResult bindingResult) {

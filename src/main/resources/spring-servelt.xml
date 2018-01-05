@@ -24,8 +24,9 @@
         </property>
     </bean>-->
 
-    <import resource="classpath*:/dubbo/dubbo.xml"/>
-    <import resource="classpath*:/http/http.xml"/>
-    <!--<import resource="classpath*:/datasource/storage.xml"/>
-    <import resource="classpath*:/rabbitmq/rabbitmq.xml"/>-->
+    <import resource="classpath*:dubbo/dubbo.xml"/>
+    <import resource="classpath*:http/http.xml"/>
+    <import resource="classpath*:datasource/storage.xml"/>
+    <import resource="classpath*:rabbitmq/rabbitmq.xml"/>
+    <import resource="classpath*:redis/redis.xml"/>
 </beans>
