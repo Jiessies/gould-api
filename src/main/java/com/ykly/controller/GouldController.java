@@ -4,12 +4,14 @@ import com.ykly.entity.ResMsg;
 import com.ykly.entity.request.geocoding.GeoCoding;
 import com.ykly.entity.request.pathplanning.DistanceMeasurement;
 import com.ykly.service.GouldService;
+import com.ykly.service.ProductSolrService;
 import com.ykly.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * Created by huangmingjie on 2017/12/2.
@@ -23,6 +25,9 @@ public class GouldController {
     
     @Autowired
     private TestService testService;
+    
+    @Autowired
+    private ProductSolrService productSolrService;
     
     @PostMapping("/distance")
     public ResMsg getDistanceMeasurement(@Valid DistanceMeasurement distanceMeasurement, BindingResult bindingResult) {
@@ -47,5 +52,10 @@ public class GouldController {
     @GetMapping("/findorder/{orderNo}")
     public String findOrder(@PathVariable String orderNo) {
         return testService.findOrder(orderNo);
+    }
+    
+    @GetMapping("/querysolr/{orderNo}")
+    public Map<String, Object> querySolrProduct(@PathVariable String orderNo) {
+        return productSolrService.queryProductSolr(orderNo);
     }
 }

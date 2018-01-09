@@ -29,4 +29,5 @@
     <import resource="classpath*:datasource/storage.xml"/>
     <import resource="classpath*:rabbitmq/rabbitmq.xml"/>
     <import resource="classpath*:redis/redis.xml"/>
+    <import resource="classpath*:solr/solr.xml"/>
 </beans>
