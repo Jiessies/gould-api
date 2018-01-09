@@ -5,6 +5,7 @@ import com.ykly.entity.request.geocoding.GeoCoding;
 import com.ykly.entity.request.pathplanning.DistanceMeasurement;
 import com.ykly.service.GouldService;
 import com.ykly.service.ProductSolrService;
+import com.ykly.service.TestMqService;
 import com.ykly.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,9 @@ public class GouldController {
     
     @Autowired
     private ProductSolrService productSolrService;
+    
+    @Autowired
+    private TestMqService testMqService;
     
     @PostMapping("/distance")
     public ResMsg getDistanceMeasurement(@Valid DistanceMeasurement distanceMeasurement, BindingResult bindingResult) {
@@ -57,5 +61,10 @@ public class GouldController {
     @GetMapping("/querysolr/{orderNo}")
     public Map<String, Object> querySolrProduct(@PathVariable String orderNo) {
         return productSolrService.queryProductSolr(orderNo);
+    }
+    
+    @GetMapping("/sendmq/{orderNo}")
+    public String sendMessage (@PathVariable String orderNo) {
+        return testMqService.sendMessage(orderNo);
     }
 }
