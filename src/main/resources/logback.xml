@@ -1,131 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="30 seconds">
-	<!-- 日志存放的路径  -->
-	<property name="LOG_HOME" value="/data/logs" />
-	<!--APP名-->
-	<property name="APP_NAME" value="gould-api" />
-	<!-- 默认日志 -->
-	<appender name="DEFAULT-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      		<fileNamePattern>${LOG_HOME}/${APP_NAME}/default/common-default.log.%d{yyyyMMdd}</fileNamePattern>
-    	</rollingPolicy>
-		<encoder charset="UTF-8">
-			<pattern>%d [%t] %-5p %c{2} [%X{CLIENT}] [%X{A}/%X{B}/%X{C}/] - [%m]%n</pattern>
-		</encoder>
-    </appender>
-    
-	<!-- 错误日志 -->
-	<appender name="ERROR-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-    		<level>ERROR</level>
-    	</filter>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      		<fileNamePattern>${LOG_HOME}/${APP_NAME}/error/common-error.log.%d{yyyyMMdd}</fileNamePattern>
-    	</rollingPolicy>
-		<encoder charset="UTF-8">
-			<pattern>%d [%t] %-5p %c{2} [%X{CLIENT}] [%X{A}/%X{B}/%X{C}/] - [%m]%n</pattern>
-		</encoder>
-    </appender>
 
-	<!-- 数据访问层日志 -->
-	<appender name="DAO-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<Encoding>UTF-8</Encoding>
-		<file>${loggingRoot}/dao/common-dao.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/${APP_NAME}/dao/common-dao.log.%i</fileNamePattern>
-			<minIndex>1</minIndex>
-			<maxIndex>5</maxIndex>
-		</rollingPolicy>>
-		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<maxFileSize>10MB</maxFileSize>
-		</triggeringPolicy>
-		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<pattern>%d [%t] %-5p %c{2} [%X{CLIENT}] [%X{A}/%X{B}/%X{C}/] - [%m]%n</pattern>
-		</encoder>
-	</appender>
+    <contextName>xcloud-print</contextName>
+    <property name="LOG_PATH" value="/Users/huangmingjie/yingke/logs"/>
+    <property name="APPDIR" value="gould-api"/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%date{yyyy-MM-dd HH:mm:ss} | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %msg%n"/>
 
-    <!-- 业务日志 -->
-	<appender name="COMMON-BUSINESS-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 日志记录器，日期滚动记录 -->
+    <appender name="FILEERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LOG_PATH}/${APPDIR}/xcloud-print_log_error.log</file>
+        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      		<fileNamePattern>${LOG_HOME}/${APP_NAME}/business/common-business.log.%d{yyyyMMdd}</fileNamePattern>
-    	</rollingPolicy>
-		<encoder charset="UTF-8">
-			<pattern>%d [%t] %-5p %c{2} [%X{CLIENT}] [%X{A}/%X{B}/%X{C}/] - [%m]%n</pattern>
-		</encoder>
-    </appender>
-    <!-- 报警日志 预留 -->
-    <appender name="COMMON-ALARM-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      		<fileNamePattern>${LOG_HOME}/${APP_NAME}/alarm/common-alarm.log.%d{yyyyMMdd}</fileNamePattern>
-    	</rollingPolicy>
-		<encoder charset="UTF-8">
-			<pattern>%d [%t] %-5p %c{2} [%X{CLIENT}] [%X{A}/%X{B}/%X{C}/] - [%m]%n</pattern>
-		</encoder>
-    </appender>                                                                                                                                                                                                                                                                                                                
-    <!-- 接口出入日志 -->
-    <appender name="COMMON-SERVICE-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      		<fileNamePattern>${LOG_HOME}/${APP_NAME}/service/common-service.log.%d{yyyyMMdd}</fileNamePattern>
-    	</rollingPolicy>
-		<encoder charset="UTF-8">
-			<pattern>%d [%t] %-5p %c{2} [%X{CLIENT}] [%X{A}/%X{B}/%X{C}/] - [%m]%n</pattern>
-		</encoder>
+            <!-- 归档的日志文件的路径，例如今天是2013-12-21日志，当前写的日志文件路径为file节点指定，可以将此文件与file指定文件路径设置为不同路径，从而将当前日志文件或归档日志文件置不同的目录。
+            而2013-12-21的日志文件在由fileNamePattern指定。%d{yyyy-MM-dd}指定日期格式，%i指定索引 -->
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/error/xcloud-print_log-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始，
+            命名日志文件，例如log-error-2013-12-21.0.log -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>12MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 追加方式记录日志 -->
+        <append>true</append>
+        <!-- 日志文件的格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger Line:%-3L - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!-- 此日志文件只记录error级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
     </appender>
 
+    <!-- 日志记录器，日期滚动记录 -->
+    <appender name="FILEWARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LOG_PATH}/${APPDIR}/xcloud-print_log_warn.log</file>
+        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 归档的日志文件的路径，例如今天是2013-12-21日志，当前写的日志文件路径为file节点指定，可以将此文件与file指定文件路径设置为不同路径，从而将当前日志文件或归档日志文件置不同的目录。
+            而2013-12-21的日志文件在由fileNamePattern指定。%d{yyyy-MM-dd}指定日期格式，%i指定索引 -->
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/warn/xcloud-print_log-warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始，
+            命名日志文件，例如log-error-2013-12-21.0.log -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>12MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 追加方式记录日志 -->
+        <append>true</append>
+        <!-- 日志文件的格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger Line:%-3L - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!-- 此日志文件只记录warn级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>warn</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
 
-	<!-- 控制台输出 -->
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
-			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
-		</encoder>
-	</appender>
+    <!-- 日志记录器，日期滚动记录 -->
+    <appender name="FILEINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LOG_PATH}/${APPDIR}/xcloud-print_log_info.log</file>
+        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 归档的日志文件的路径，例如今天是2013-12-21日志，当前写的日志文件路径为file节点指定，可以将此文件与file指定文件路径设置为不同路径，从而将当前日志文件或归档日志文件置不同的目录。
+            而2013-12-21的日志文件在由fileNamePattern指定。%d{yyyy-MM-dd}指定日期格式，%i指定索引 -->
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/info/xcloud-print_log-info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始，
+            命名日志文件，例如log-error-2013-12-21.0.log -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>12MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 追加方式记录日志 -->
+        <append>true</append>
+        <!-- 日志文件的格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger Line:%-3L - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!-- 此日志文件只记录info级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>info</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
 
+    <!-- 日志记录器，日期滚动记录 -->
+    <appender name="FILEDEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LOG_PATH}/${APPDIR}/xcloud-print_log_debug.log</file>
+        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 归档的日志文件的路径，例如今天是2013-12-21日志，当前写的日志文件路径为file节点指定，可以将此文件与file指定文件路径设置为不同路径，从而将当前日志文件或归档日志文件置不同的目录。
+            而2013-12-21的日志文件在由fileNamePattern指定。%d{yyyy-MM-dd}指定日期格式，%i指定索引 -->
+            <fileNamePattern>${LOG_PATH}/${APPDIR}/info/xcloud-print_log-debug-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始，
+            命名日志文件，例如log-error-2013-12-21.0.log -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>12MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 追加方式记录日志 -->
+        <append>true</append>
+        <!-- 日志文件的格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger Line:%-3L - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <!-- 此日志文件只记录debug级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>debug</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
 
-	<!-- 空洞日志 -->
-	<appender name="NULL-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${LOG_HOME}/${APP_NAME}/null/common-null.log.%d{yyyyMMdd}</fileNamePattern>
-			<maxHistory>5</maxHistory>
-		</rollingPolicy>
-		<encoder charset="UTF-8">
-			<pattern>%d [%t] %-5p %c{2} [%X{CLIENT}] [%X{A}/%X{B}/%X{C}/] - [%m]%n</pattern>
-		</encoder>
-	</appender>
-                                                                                                                                                                                                                                                                                             
-	<!-- ===================================================================== -->
-	<!-- Loggers                                                               -->
-	<!-- ===================================================================== -->
+    <appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <SMTPHost>smtp.exmail.qq.com</SMTPHost>
+        <smtpPort>25</smtpPort>
+        <To>${email.to}</To>
+        <from>1422943933@qq.com</from>
+        <Subject>Error in system: %logger{20} - %m</Subject>
+        <Username>${email.username}</Username>
+        <Password>${email.password}</Password>
+        <asynchronousSending>true</asynchronousSending>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date %-5level %logger{35} - %message%n</Pattern>
+        </layout>
+    </appender>
 
-	<logger name="dao" additivity="false">
-		<level>DEBUG</level>
-		<appender-ref ref="DAO-APPENDER"/>
-		<appender-ref ref="ERROR-APPENDER"/>
-		<!--<appender-ref ref="STDOUT"/>-->
-	</logger>
+    <!--日志异步到数据库 -->
+    <appender name="ASYNCLOGDB" class="ch.qos.logback.classic.db.DBAppender">
+        <!--日志异步到数据库 -->
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <!--连接池 -->
+            <dataSource class="com.alibaba.druid.pool.DruidDataSource">
+                <driverClass>com.mysql.jdbc.Driver</driverClass>
+                <url>jdbc:mysql://127.0.0.1:3306/ordercenter</url>
+                <user>root</user>
+                <password>123456</password>
+            </dataSource>
+        </connectionSource>
+    </appender>
 
-    <logger name="COMMON.BUSINESS" additivity="false">
-		<level value="INFO"/>
-		<appender-ref ref="COMMON-BUSINESS-APPENDER"/>
-	</logger>
-	<logger name="COMMON.ALARM" additivity="false">
-		<level value="INFO"/>
-		<appender-ref ref="COMMON-ALARM-APPENDER"/>
-	</logger>
-	<logger name="COMMON.SERVICE" additivity="false">
-		<level value="INFO"/>
-		<appender-ref ref="COMMON-SERVICE-APPENDER"/>
-	</logger>
-	
-	<!-- <logger name="org.apache.commons.httpclient" level="ERROR" /> -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!--encoder 默认配置为PatternLayoutEncoder-->
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level -&#45;&#45; [%thread] %logger Line:%-3L - %msg%n</pattern>-->
+            <charset>utf-8</charset>
+        </encoder>
+        <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+    </appender>
 
-	<!-- ===================================================================== -->
-	<!-- Root logger                                                           -->
-	<!-- ===================================================================== -->
-	
-	<root level="info">
-	    <appender-ref ref="DEFAULT-APPENDER"/>
-		<appender-ref ref="ERROR-APPENDER"/>
-		<appender-ref ref="STDOUT"/>
-	</root>
- </configuration>
+    <logger name="org.springframework" level="WARN"/>
+
+    <!-- mybatis日志打印 -->
+    <logger name="com.ibatis" level="DEBUG"/>
+    <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG"/>
+    <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG"/>
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG"/>
+
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    <logger name="com.ykly.mapper" level="DEBUG"></logger>
+
+    <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
+    <root level="INFO">
+        <appender-ref ref="FILEERROR"/>
+        <appender-ref ref="FILEWARN"/>
+        <appender-ref ref="FILEINFO"/>
+        <appender-ref ref="FILEDEBUG"/>
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="ASYNCLOGDB"/>-->
+        <!--<appender-ref ref="EMAIL"/>-->
+    </root>
+</configuration>
