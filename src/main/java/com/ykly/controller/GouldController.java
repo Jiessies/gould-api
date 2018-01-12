@@ -58,18 +58,28 @@ public class GouldController {
         return testService.findOrder(orderNo);
     }
     
+    @GetMapping("/tx/{orderNo}")
+    public String txTest(@PathVariable String orderNo) {
+        return testService.txTest(orderNo);
+    }
+    
     @GetMapping("/querysolr/{orderNo}")
     public Map<String, Object> querySolrProduct(@PathVariable String orderNo) {
         return productSolrService.queryProductSolr(orderNo);
     }
     
     @GetMapping("/sendmq/{orderNo}")
-    public String sendMessage (@PathVariable String orderNo) {
+    public String sendMessage(@PathVariable String orderNo) {
         return testMqService.sendMessage(orderNo);
     }
     
     @GetMapping("/zk/{serverId}")
-    public String testZookeeper (@PathVariable String serverId) {
+    public String testZookeeper(@PathVariable String serverId) {
         return zookeeperService.testZookeeper(serverId);
+    }
+    
+    @GetMapping("/redisLock/{key}/{value}")
+    public String redisLock(@PathVariable String key, @PathVariable String value) {
+        return gouldService.redisLock(key, value);
     }
 }

@@ -16,4 +16,6 @@ public interface GouldService {
     String getString();
     
     String setRedis(String key, String value);
+    
+    String redisLock(String key, String value);
 }

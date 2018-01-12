@@ -1,5 +1,6 @@
 package com.ykly.common.utils;
 
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
 
@@ -524,5 +525,21 @@ public class RedisUtil {
             e.printStackTrace();
             return 0;
         }
+    }
+    
+    /**
+     * setnx
+     * @param key
+     * @param value
+     * @return
+     */
+    public long setnx(String key, String value) {
+        long l = 0;
+        RedisConnection connection = redisTemplate.getConnectionFactory().getConnection();
+        boolean flag = connection.setNX(key.getBytes(),value.getBytes());
+        if(flag){
+            l = 1;
+        }
+        return l;
     }
 }

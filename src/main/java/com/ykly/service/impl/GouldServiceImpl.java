@@ -13,6 +13,8 @@ import com.ykly.entity.request.pathplanning.DistanceMeasurement;
 import com.ykly.service.GouldService;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,8 @@ import java.util.Map;
  */
 @Service
 public class GouldServiceImpl implements GouldService {
+    
+    private static final Logger logger = LoggerFactory.getLogger(GouldServiceImpl.class);
     
     @Autowired
     private RedisUtil redisUtil;
@@ -114,6 +118,18 @@ public class GouldServiceImpl implements GouldService {
             e.printStackTrace();
         }
         return params;
+    }
+    
+    @Override
+    public String redisLock(String key, String value) {
+        long flag = redisUtil.setnx(key, value);
+        if(flag == 1){
+            logger.info("redisUtil setnx:{}", key);
+            redisUtil.del(key);
+            logger.info("redisUtil del key:{}", key);
+            return "succ";
+        }
+        return "fail";
     }
     
     public YklyRestTemplate getRestTemplate() {

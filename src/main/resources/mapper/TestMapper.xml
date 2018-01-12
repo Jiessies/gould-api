@@ -5,4 +5,12 @@
     <select id="findOrder" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT orderNo FROM `order` WHERE orderNo = #{orderNo}
     </select>
+
+    <insert id="insertOrder" parameterType="com.ykly.entity.request.order.Order">
+        INSERT INTO `order` (orderNo, createtime, orderstatus, orderprice) VALUE (#{orderNo},#{createtime},#{orderstatus},#{orderprice});
+    </insert>
+
+    <update id="updateOrder" parameterType="java.lang.String">
+        UPDATE `order` SET orderstatus = 0 WHERE orderNo = #{orderNo}
+    </update>
 </mapper>

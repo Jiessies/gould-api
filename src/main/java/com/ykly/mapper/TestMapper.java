@@ -1,5 +1,6 @@
 package com.ykly.mapper;
 
+import com.ykly.entity.request.order.Order;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,4 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TestMapper {
     String findOrder(String orderNo);
+    
+    int insertOrder(Order order);
+    
+    int updateOrder(String orderNo);
 }

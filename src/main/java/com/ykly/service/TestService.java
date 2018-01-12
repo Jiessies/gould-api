@@ -5,4 +5,6 @@ package com.ykly.service;
  */
 public interface TestService {
     String findOrder(String orderNo);
+    
+    String txTest(String orderNo);
 }
