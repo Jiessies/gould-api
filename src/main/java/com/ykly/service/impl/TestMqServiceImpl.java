@@ -22,6 +22,10 @@ public class TestMqServiceImpl implements TestMqService{
     @Qualifier("jsonRabbitTemplate")
     private AmqpTemplate amqpTemplate;
     
+    @Autowired
+    @Qualifier("simpleRabbitTemplate")
+    private AmqpTemplate samqpTemplate;
+    
     @Override
     public String sendMessage(Object obj) {
         logger.info("order.type is 24 send TaskCallBackQueue, jobAddReq:{}",obj);
@@ -38,5 +42,14 @@ public class TestMqServiceImpl implements TestMqService{
         geoCoding.setKey("UUUUUUUUUUUU");
         geoCoding.setSig("");
         return geoCoding;
+    }
+    
+    @Override
+    public String send1Message(Object obj) {
+        logger.info("order.type is 24 send TaskCallBackQueue, jobAddReq:{}",obj);
+        samqpTemplate.convertAndSend("rabbit.huangmingjie111",obj);
+        samqpTemplate.convertAndSend("rabbit.huangmingjie222",obj+"2222");
+        samqpTemplate.convertAndSend("rabbit",obj+"3333");
+        return "succ";
     }
 }

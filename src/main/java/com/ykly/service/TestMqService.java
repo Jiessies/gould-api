@@ -5,4 +5,5 @@ package com.ykly.service;
  */
 public interface TestMqService {
     String sendMessage(Object obj);
+    String send1Message(Object obj);
 }

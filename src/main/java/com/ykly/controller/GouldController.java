@@ -73,6 +73,11 @@ public class GouldController {
         return testMqService.sendMessage(orderNo);
     }
     
+    @GetMapping("/sendmq1/{orderNo}")
+    public String send1Message(@PathVariable String orderNo) {
+        return testMqService.send1Message(orderNo);
+    }
+    
     @GetMapping("/zk/{serverId}")
     public String testZookeeper(@PathVariable String serverId) {
         return zookeeperService.testZookeeper(serverId);
