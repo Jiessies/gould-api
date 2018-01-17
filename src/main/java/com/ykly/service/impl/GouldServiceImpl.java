@@ -122,7 +122,7 @@ public class GouldServiceImpl implements GouldService {
     
     @Override
     public String redisLock(String key, String value) {
-        long flag = redisUtil.setnx(key, value);
+        int flag = redisUtil.setnx(key, value);
         if(flag == 1){
             logger.info("redisUtil setnx:{}", key);
             redisUtil.del(key);

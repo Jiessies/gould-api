@@ -19,6 +19,9 @@
     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"/>
 
     <dubbo:service interface="com.ykly.service.GouldService"
-                   ref="gouldService" retries="0" timeout="6000"/>
+                   ref="gouldService" retries="0" timeout="6000" group="test" version="1.0.0"/>
+
+    <dubbo:service interface="com.ykly.service.GouldService"
+                   ref="gouldService2" retries="0" timeout="6000" group="test2" version="1.0.0"/>
 
 </beans>

@@ -48,4 +48,6 @@
     <bean id="gouldService" class="com.ykly.service.impl.GouldServiceImpl">
         <property name="restTemplate" ref="restTemplate"/>
     </bean>
+
+    <bean id="gouldService2" class="com.ykly.service.impl.GouldServiceImpl2"/>
 </beans>

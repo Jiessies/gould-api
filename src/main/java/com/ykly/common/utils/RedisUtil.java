@@ -126,7 +126,7 @@ public class RedisUtil {
     /**
      * 递增
      * @param key 键
-     * @param by 要增加几(大于0)
+     * @param delta 要增加几(大于0)
      * @return
      */
     public long incr(String key, long delta){
@@ -427,7 +427,6 @@ public class RedisUtil {
      * 将list放入缓存
      * @param key 键
      * @param value 值
-     * @param time 时间(秒)
      * @return
      */
     public boolean lSet(String key, Object value) {
@@ -533,12 +532,19 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public long setnx(String key, String value) {
-        long l = 0;
-        RedisConnection connection = redisTemplate.getConnectionFactory().getConnection();
-        boolean flag = connection.setNX(key.getBytes(),value.getBytes());
-        if(flag){
-            l = 1;
+    public int setnx(String key, String value) {
+        int l = 0;
+        RedisConnection connection = null;
+        try {
+            connection = redisTemplate.getConnectionFactory().getConnection();
+            boolean flag = connection.setNX(key.getBytes(),value.getBytes());
+            if(flag){
+                l = 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
         return l;
     }
