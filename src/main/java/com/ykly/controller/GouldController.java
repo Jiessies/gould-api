@@ -41,13 +41,13 @@ public class GouldController {
     
     @PostMapping(value = "/distance")
     @ApiOperation(value = "查询坐标点距离", notes = "查询坐标点距离")
-    public ResMsg getDistanceMeasurement(@Valid DistanceMeasurement distanceMeasurement, BindingResult bindingResult) {
+    public ResMsg getDistanceMeasurement(@RequestBody @Valid DistanceMeasurement distanceMeasurement, BindingResult bindingResult) {
         return gouldService.getDistanceMeasurement(distanceMeasurement, bindingResult);
     }
     
     @PostMapping("/geo")
     @ApiOperation(value = "坐标", notes = "坐标")
-    public ResMsg getGeoCoding(GeoCoding geoCoding) {
+    public ResMsg getGeoCoding(@RequestBody GeoCoding geoCoding) {
         return gouldService.getGeoCoding(geoCoding);
     }
     
