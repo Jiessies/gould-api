@@ -13,7 +13,7 @@ public interface GouldService {
     
     ResMsg getGeoCoding(GeoCoding geoCoding);
     
-    String getString();
+    ResMsg getString(String name);
     
     String setRedis(String key, String value);
     

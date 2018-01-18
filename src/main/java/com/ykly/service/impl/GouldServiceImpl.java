@@ -2,6 +2,7 @@ package com.ykly.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.ykly.annotation.LogAnalysis;
 import com.ykly.common.enums.ERetCode;
 import com.ykly.common.enums.OptType;
 import com.ykly.common.logs.FightOpty;
@@ -73,9 +74,11 @@ public class GouldServiceImpl implements GouldService {
     }
     
     @Override
-    public String getString() {
+    @LogAnalysis
+    public ResMsg getString(String name) {
+        logger.info("=====>" + name);
         String forObject = restTemplate.lGet("https://www.baidu.com/", null, null, new FightOpty(OptType.GOULD_DISTANCE_MEASUREMENT, ""));
-        return forObject;
+        return ResMsg.succWithData(forObject);
     }
     
     @Override

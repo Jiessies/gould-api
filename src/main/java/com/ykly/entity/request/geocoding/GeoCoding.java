@@ -1,7 +1,7 @@
 package com.ykly.entity.request.geocoding;
 
-import com.wordnik.swagger.annotations.ApiModel;
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by huangmingjie on 2017/12/4.

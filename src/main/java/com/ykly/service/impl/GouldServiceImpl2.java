@@ -1,5 +1,6 @@
 package com.ykly.service.impl;
 
+import com.ykly.annotation.LogAnalysis;
 import com.ykly.entity.ResMsg;
 import com.ykly.entity.request.geocoding.GeoCoding;
 import com.ykly.entity.request.pathplanning.DistanceMeasurement;
@@ -23,8 +24,9 @@ public class GouldServiceImpl2 implements GouldService {
     }
     
     @Override
-    public String getString() {
-        return "Success";
+    @LogAnalysis
+    public ResMsg getString(String name) {
+        return ResMsg.succWithData("Success " + name);
     }
     
     @Override
