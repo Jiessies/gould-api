@@ -8,12 +8,16 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -22,7 +26,10 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/gould")
 @Api(value = "高德信息", description = "高德信息")
+@Validated
 public class GouldController {
+    
+    private static final Logger logger = LoggerFactory.getLogger(GouldController.class);
     
     @Autowired
     private GouldService gouldService;
@@ -39,6 +46,13 @@ public class GouldController {
     @Autowired
     private ZookeeperService zookeeperService;
     
+    @ApiOperation(value = ">_<")
+    @ApiIgnore
+    @GetMapping("/")
+    public String hello() {
+        return String.join(" ", "Hello", "!");
+    }
+    
     @PostMapping(value = "/distance")
     @ApiOperation(value = "查询坐标点距离", notes = "查询坐标点距离")
     public ResMsg getDistanceMeasurement(@RequestBody @Valid DistanceMeasurement distanceMeasurement, BindingResult bindingResult) {
@@ -47,21 +61,39 @@ public class GouldController {
     
     @PostMapping("/geo")
     @ApiOperation(value = "坐标", notes = "坐标")
-    public ResMsg getGeoCoding(@RequestBody GeoCoding geoCoding) {
+    public ResMsg getGeoCoding(GeoCoding geoCoding) {
         return gouldService.getGeoCoding(geoCoding);
     }
     
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "name",value = "名字", required = true, paramType = "query")
+            @ApiImplicitParam(name = "name", value = "名字", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "cinemaNo", value = "影院名称", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "cinemaLinkId", value = "影院ID", required = true, paramType = "query")
     })
-    @RequestMapping(value = "/get/{name}", method = RequestMethod.GET)
-    public ResMsg getString(@PathVariable String name) {
+    @RequestMapping(value = "/get/{name}")
+    public ResMsg getString(@RequestHeader(value = "X-Request-Id", required = false, defaultValue = "") String requestId,
+                            @PathVariable String name,
+                            @RequestParam(value = "userId", required = true) String userId,
+                            @NotNull(message = "Required String parameter 'cinemaNo' is not present") String cinemaNo,
+                            String cinemaLinkId) {
+        logger.info(requestId + name + userId + cinemaNo + cinemaLinkId);
         return gouldService.getString(name);
     }
     
+    @RequestMapping(value = "/get1/{name}")
+    public ResMsg getString1(@RequestHeader(value = "X-Request-Id", required = false, defaultValue = "") String requestId,
+                             @PathVariable String name,
+                             @RequestParam(value = "userId") String userId,
+                             String cinemaNo,
+                             String cinemaLinkId) {
+        logger.info(requestId + name + userId + cinemaNo + cinemaLinkId);
+        return ResMsg.succWithData("succ");
+    }
+    
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "key",value = "key", required = true, paramType = "query"),
-            @ApiImplicitParam(name = "value",value = "value", required = true, paramType = "query")
+            @ApiImplicitParam(name = "key", value = "key", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "value", value = "value", required = true, paramType = "query")
     })
     @RequestMapping(value = "/redis/{key}/{value}", method = RequestMethod.GET)
     public String setRedis(@PathVariable String key, @PathVariable String value) {
@@ -102,4 +134,5 @@ public class GouldController {
     public String redisLock(@PathVariable String key, @PathVariable String value) {
         return gouldService.redisLock(key, value);
     }
+    //@Validated 单参数校验不正确
 }
