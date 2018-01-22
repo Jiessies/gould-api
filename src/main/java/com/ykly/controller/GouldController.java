@@ -68,7 +68,7 @@ public class GouldController {
             @ApiImplicitParam(name = "cinemaNo", value = "影院名称", required = true, paramType = "query"),
             @ApiImplicitParam(name = "cinemaLinkId", value = "影院ID", required = true, paramType = "query")
     })
-    @RequestMapping(value = "/get/{name}")
+    @RequestMapping(value = "/get/{name}",method = RequestMethod.POST)
     public ResMsg getString(@RequestHeader(value = "X-Request-Id", required = false, defaultValue = "") String requestId,
                             @PathVariable String name,
                             @RequestParam(value = "userId") String userId,
@@ -78,7 +78,7 @@ public class GouldController {
         return gouldService.getString(name);
     }
     
-    @RequestMapping(value = "/get1/{name}")
+    @RequestMapping(value = "/get1/{name}",method = RequestMethod.POST)
     public ResMsg getString1(@RequestHeader(value = "X-Request-Id", required = false, defaultValue = "") String requestId,
                              @PathVariable String name,
                              @RequestParam(value = "userId") String userId,
