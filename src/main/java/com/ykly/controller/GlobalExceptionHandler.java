@@ -3,16 +3,35 @@ package com.ykly.controller;
 import com.ykly.common.enums.ERetCode;
 import com.ykly.entity.ResMsg;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 
+//@EnableWebMvc
+//(annotations = {RestController.class})
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+    
+    /*@Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
+    }
+    
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public String handle(ValidationException exception) {
+        log.error("bad request, " + exception.getMessage());
+        return "bad request, " + exception.getLocalizedMessage();
+    }*/
     
     @ExceptionHandler(value = Throwable.class)
     public ResMsg throwableHandler(Throwable t) throws Exception {

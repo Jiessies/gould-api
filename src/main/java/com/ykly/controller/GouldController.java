@@ -12,12 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -26,7 +24,6 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/gould")
 @Api(value = "高德信息", description = "高德信息")
-@Validated
 public class GouldController {
     
     private static final Logger logger = LoggerFactory.getLogger(GouldController.class);
@@ -74,8 +71,8 @@ public class GouldController {
     @RequestMapping(value = "/get/{name}")
     public ResMsg getString(@RequestHeader(value = "X-Request-Id", required = false, defaultValue = "") String requestId,
                             @PathVariable String name,
-                            @RequestParam(value = "userId", required = true) String userId,
-                            @NotNull(message = "Required String parameter 'cinemaNo' is not present") String cinemaNo,
+                            @RequestParam(value = "userId") String userId,
+                            String cinemaNo,
                             String cinemaLinkId) {
         logger.info(requestId + name + userId + cinemaNo + cinemaLinkId);
         return gouldService.getString(name);
@@ -88,7 +85,35 @@ public class GouldController {
                              String cinemaNo,
                              String cinemaLinkId) {
         logger.info(requestId + name + userId + cinemaNo + cinemaLinkId);
+        if ("huangmingjie".equals(name)) {
+            throw new RuntimeException();
+        }
         return ResMsg.succWithData("succ");
+    }
+    
+    @RequestMapping(value = "/get2", method = RequestMethod.POST, consumes = "multipart/form-data", params = "mykey=myvalue", headers = "Referer=http://www.ifeng.com/", produces = "application/json")
+    public ResMsg getStrin2(GeoCoding geoCoding) {
+        System.out.println(geoCoding);
+        return ResMsg.succWithData(geoCoding);
+    }
+    
+    @RequestMapping(value = "/get3", method = RequestMethod.POST, consumes = "multipart/form-data", params = "mykey=myvalue", headers = "Referer=http://www.ifeng.com/", produces = "application/json")
+    public ResMsg getStrin3(String userId, String cinemaNo, String cinemaLinkId) {
+        System.out.println(userId + cinemaNo + cinemaLinkId);
+        return ResMsg.succWithData("succ");
+    }
+    
+    @RequestMapping(value = "/get4", method = RequestMethod.POST, consumes = "multipart/form-data", params = "mykey=myvalue", headers = "Referer=http://www.ifeng.com/", produces = "application/json")
+    public ResMsg getStrin4(String userId, String cinemaNo, String cinemaLinkId) {
+        System.out.println(userId + cinemaNo + cinemaLinkId);
+        return ResMsg.succWithData("succ");
+    }
+    
+    //@RequestBody consumes 必须为 "application/json" params也用不了
+    @RequestMapping(value = "/get5", method = RequestMethod.POST, consumes = "application/json", headers = "Referer=http://www.ifeng.com/", produces = "application/json")
+    public ResMsg getStrin5(@RequestBody GeoCoding geoCoding) {
+        System.out.println(geoCoding);
+        return ResMsg.succWithData(geoCoding);
     }
     
     @ApiImplicitParams({
