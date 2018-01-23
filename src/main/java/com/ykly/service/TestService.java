@@ -7,4 +7,6 @@ public interface TestService {
     String findOrder(String orderNo);
     
     String txTest(String orderNo);
+    
+    String testJavaPool(int size);
 }

@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Created by huangmingjie on 2018/1/3.
@@ -26,6 +26,9 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private TestMapper testMapper;
     
+    @Autowired
+    private ExecutorService executorServiceJ;
+    
     @Override
     public String findOrder(String orderNo) {
         logger.info(orderNo + ": info Test");
@@ -35,7 +38,7 @@ public class TestServiceImpl implements TestService {
     
     @Override
     @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
-    public String txTest(String orderNo){
+    public String txTest(String orderNo) {
         int flag;
         logger.info(orderNo + ": Tx Test");
         RoutingDataSource.setDataSourceKey(RoutingDataSource.getDataSourceOrderOther());
@@ -45,13 +48,28 @@ public class TestServiceImpl implements TestService {
         order.setOrderprice(100);
         order.setOrderstatus(1);
         flag = testMapper.insertOrder(order);
-        logger.info("insertOrder :{}",flag);
-        if(flag == 1){
-            logger.error("RuntimeException flag :{}",flag);
+        logger.info("insertOrder :{}", flag);
+        if (flag == 1) {
+            logger.error("RuntimeException flag :{}", flag);
             throw new RuntimeException();
         }
         flag = testMapper.updateOrder(orderNo);
-        logger.info("updateOrder :{}",flag);
-        return flag!=0?"succ":"fail";
+        logger.info("updateOrder :{}", flag);
+        return flag != 0 ? "succ" : "fail";
+    }
+    
+    @Override
+    public String testJavaPool(int size) {
+        for (int i = 0; i < size; i++) {
+            int finalI = i;
+            executorServiceJ.execute(new Runnable() {
+                @Override
+                public void run() {
+                    logger.info("进入线程池:" + finalI);
+                }
+            });
+        }
+        executorServiceJ.shutdown();
+        return "succ";
     }
 }

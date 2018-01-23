@@ -32,4 +32,5 @@
     <import resource="classpath*:rabbitmq/rabbitmq.xml"/>
     <import resource="classpath*:redis/redis.xml"/>
     <import resource="classpath*:solr/solr.xml"/>
+    <import resource="classpath*:pool/pool.xml"/>
 </beans>

@@ -135,6 +135,11 @@ public class GouldController {
         return testService.txTest(orderNo);
     }
     
+    @GetMapping("/pool/{size}")
+    public String testPool(@PathVariable int size) {
+        return testService.testJavaPool(size);
+    }
+    
     @GetMapping("/querysolr/{orderNo}")
     public Map<String, Object> querySolrProduct(@PathVariable String orderNo) {
         return productSolrService.queryProductSolr(orderNo);
