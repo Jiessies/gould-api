@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.*;
 
 /**
  * Created by huangmingjie on 2018/1/3.
@@ -60,6 +60,9 @@ public class TestServiceImpl implements TestService {
     
     @Override
     public String testJavaPool(int size) {
+        CountDownLatch countDownLatch = new CountDownLatch(size);
+        CompletionService<String> completionService = new ExecutorCompletionService<String>(executorServiceJ);
+        
         for (int i = 0; i < size; i++) {
             int finalI = i;
             executorServiceJ.execute(new Runnable() {
@@ -68,6 +71,46 @@ public class TestServiceImpl implements TestService {
                     logger.info("进入线程池:" + finalI);
                 }
             });
+        }
+        try {
+            for(int i = 0; i < size; i++){
+                completionService.submit(new Callable<String>() {
+                    @Override
+                    public String call() throws Exception {
+                        countDownLatch.countDown();
+                        return "completion";
+                    }
+                });
+            }
+            countDownLatch.await();
+            System.out.println("===>"+completionService.take().get());
+            Future future = executorServiceJ.submit(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("succ");
+                }
+            }, String.class);
+            System.out.println("===>"+future.get());
+    
+            Future<?> future1 = executorServiceJ.submit(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println("succ1");
+                }
+            });
+            System.out.println("===>"+future1.get());
+    
+            Future<String> future2 = executorServiceJ.submit(new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return "succ2";
+                }
+            });
+            System.out.println("===>"+future2.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
         executorServiceJ.shutdown();
         return "succ";
