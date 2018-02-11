@@ -1,8 +1,10 @@
 package com.ykly.common.utils;
 
 import java.security.MessageDigest;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /**
  * Created by huangmingjie on 2017/10/20.
@@ -61,5 +63,10 @@ public class StringUtil {
             uriSb.append(entity.getKey()).append("=").append(entity.getValue()).append("&");
         }
         return StringUtil.md5(uriSb.append(secret_key).toString());
+    }
+    
+    private static LinkedHashMap<String, String> getSandLMap(Map<String, String> map) {
+        return map.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors
+                .toMap(e -> e.getKey().toLowerCase(), Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
     }
 }

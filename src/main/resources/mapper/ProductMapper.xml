@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykly.mapper.ProductMapper">
+
+    <insert id="insertProductInfo" useGeneratedKeys="true" keyProperty="product_id" parameterType="com.ykly.entity.product.ProductInfo">
+
+        INSERT INTO scm_product_info
+           (supplier_num,
+            supplier_name,
+            yk_num,
+            yk_festival_id,
+            supplier_type_id,
+            supplier_start_city,
+            supplier_destination,
+            clustering_site_id,
+            online_status,
+            submit_status,
+            principal,
+            feature,
+            activty_sales,
+            big_category_id,
+            little_category_id,
+            update_date,
+            create_date,
+            type_subset_id,
+            clouds_location_type,
+            yk_theme_id,
+            client_city_id,
+            agency_city_id,
+            agency_id,
+            vendor_id,
+            yk_director_id,
+            back_reason,
+            yk_name_fir,
+            yk_name_last,
+            info_word,
+            model_id,
+            start_site,
+            start_site_time,
+            templet_id,
+            auto_audit_status,
+            operation_status,
+            register_deadline,
+            create_login_name,
+            give_time,
+            group_people_num)
+        VALUES
+           (#{supplier_num},
+            #{supplier_name},
+            #{yk_num},
+            #{yk_festival_id},
+            #{supplier_type_id},
+            #{supplier_start_city},
+            #{supplier_destination},
+            #{clustering_site_id},
+            #{online_status},
+            #{submit_status},
+            #{principal},
+            #{feature},
+            #{activty_sales},
+            #{big_category_id},
+            #{little_category_id},
+            now(),
+            now(),
+            #{type_subset_id},
+            #{clouds_location_type},
+            #{yk_theme_id},
+            #{client_city_id},
+            #{agency_city_id},
+            #{agency_id},
+            #{vendor_id},
+            #{yk_director_id},
+            #{back_reason},
+            #{yk_name_fir},
+            #{yk_name_last},
+            #{info_word},
+            #{model_id},
+            #{start_site},
+            #{start_site_time},
+            #{templet_id},
+            #{auto_audit_status},
+            #{operation_status},
+            #{register_deadline},
+            #{create_login_name},
+            #{give_time},
+            #{group_people_num})
+    </insert>
+
+    <insert id="insertProductPic" parameterType="com.ykly.entity.product.ProductPic">
+
+        INSERT INTO scm_product_pic
+            (product_id,
+            img_length,
+            first_pic,
+            pic_name,
+            pic_type)
+        VALUES
+            (#{product_id},
+            #{img_length},
+            #{first_pic},
+            #{pic_name},
+            #{pic_type})
+    </insert>
+
+    <insert id="insertProductDT" parameterType="com.ykly.entity.product.ProductDT">
+
+        INSERT INTO scm_product_detail_trip
+            (trip_code,
+            supply_code,
+            trip_feature,
+            file_path,
+            trip_days,
+            trip_nights,
+            product_id,
+            material,
+            detail_info,
+            img_path,
+            if_default)
+        VALUES
+            (#{trip_code},
+            #{supply_code},
+            #{trip_feature},
+            #{file_path},
+            #{trip_days},
+            #{trip_nights},
+            #{product_id},
+            #{material},
+            #{detail_info},
+            #{img_path},
+            #{if_default})
+    </insert>
+
+    <insert id="insertProductDTC" useGeneratedKeys="true" keyProperty="chip_id" parameterType="com.ykly.entity.product.ProductDTC">
+
+        INSERT INTO scm_product_detail_tripchip
+            (trip_id,
+            trip_info,
+            trip_title,
+            trip_content,
+            trip_time,
+            chip_order)
+        VALUES
+            (#{trip_id},
+            #{trip_info},
+            #{trip_title},
+            #{trip_content},
+            #{trip_time},
+            #{chip_order})
+    </insert>
+
+    <insert id="insertProductDetail" parameterType="com.ykly.entity.product.ProductDetail">
+
+        INSERT INTO scm_product_detail
+            (starting_point_traffic_id,
+            return_trip_traffic_id,
+            journey_daytime_num,
+            journey_night_num,
+            circuit_journey,
+            reference_journey,
+            journey_annotation,
+            start_off_site,
+            cluster_modality,
+            yes_no_cluster,
+            headline_one,
+            headline_two,
+            headline_three,
+            depart_info,
+            urgency_people_phone,
+            inform,
+            join_service,
+            people_under_num,
+            people_exceed_num,
+            age_under_num,
+            age_exceed_num,
+            age_under_protocal_num,
+            age_min_num,
+            age_max_num,
+            foreign_nationality_tourist,
+            explain_select,
+            explain_textbox,
+            create_date,
+            update_date,
+            product_id,
+            in_price_bus_path,
+            in_price_if_bus,
+            in_price_airport,
+            in_price_airport_path,
+            in_price_visa_num,
+            in_price_hotel_star,
+            in_price_hotel_total,
+            in_price_hotel,
+            in_price_meal_info,
+            in_price_place_info,
+            in_price_place_if,
+            in_price_guide_info,
+            in_price_child_min,
+            in_price_child_max,
+            in_price_child_bed,
+            in_price_child_info,
+            in_price_tip_num,
+            in_price_tip_info,
+            in_price_present,
+            not_in_price_airport_name,
+            not_in_price_airport_path,
+            not_in_price_airport_num,
+            not_in_price_out_airport_num,
+            not_in_price_visa_num,
+            not_in_price_if_single_visa,
+            not_in_price_if_group_visa,
+            not_in_price_if_got_visa,
+            not_in_price_if_tai_visa,
+            not_in_price_selt_place,
+            notice_pay_hour,
+            notice_less_num,
+            notice_less_days,
+            notice_leave_self_money,
+            notice_note,
+            notice_visa_self,
+            notice_append,
+            notice_item1,
+            notice_item2,
+            notice_item3,
+            notice_item4,
+            notice_item5,
+            notice_item6,
+            notice_item7,
+            notice_item8,
+            if_promotion,
+            in_price_visa_type,
+            in_price_hotel_type,
+            in_price_meal_type,
+            in_price_guide_type,
+            in_price_child_type,
+            not_in_price_visa_type,
+            notice_pay_type,
+            notice_leave_self,
+            notice_gat,
+            not_in_price_supply4,
+            not_in_price_supply3,
+            not_in_price_supply2,
+            not_in_price_supply1,
+            not_in_price_if_safe,
+            transportation_way,
+            sure_plane,
+            sure_bus,
+            notice_if_need,
+            not_in_price_if_plane,
+            not_in_price_if_out_plane,
+            not_in_price_if_room,
+            not_in_price_if_self_place,
+            if_headline_one,
+            if_headline_two,
+            if_headline_three,
+            circuit_info_mark,
+            join_info_remark,
+            not_in_price_single_room,
+            feature_describe,
+            eat,
+            reside,
+            walk,
+            travel,
+            recreation,
+            reco_buy,
+            present,
+            special_offer,
+            significance_prompt,
+            traffic_information,
+            in_price_other,
+            not_in_price_other,
+            announcement,
+            warm_prompt,
+            recommend_detail,
+            default_line,
+            if_small,
+            in_price_user_defined,
+            not_in_price_user_defined)
+        VALUES
+            (#{starting_point_traffic_id},
+            #{return_trip_traffic_id},
+            #{journey_daytime_num},
+            #{journey_night_num},
+            #{circuit_journey},
+            #{reference_journey},
+            #{journey_annotation},
+            #{start_off_site},
+            #{cluster_modality},
+            #{yes_no_cluster},
+            #{headline_one},
+            #{headline_two},
+            #{headline_three},
+            #{depart_info},
+            #{urgency_people_phone},
+            #{inform},
+            #{join_service},
+            #{people_under_num},
+            #{people_exceed_num},
+            #{age_under_num},
+            #{age_exceed_num},
+            #{age_under_protocal_num},
+            #{age_min_num},
+            #{age_max_num},
+            #{foreign_nationality_tourist},
+            #{explain_select},
+            #{explain_textbox},
+            now(),
+            now(),
+            #{product_id},
+            #{in_price_bus_path},
+            #{in_price_if_bus},
+            #{in_price_airport},
+            #{in_price_airport_path},
+            #{in_price_visa_num},
+            #{in_price_hotel_star},
+            #{in_price_hotel_total},
+            #{in_price_hotel},
+            #{in_price_meal_info},
+            #{in_price_place_info},
+            #{in_price_place_if},
+            #{in_price_guide_info},
+            #{in_price_child_min},
+            #{in_price_child_max},
+            #{in_price_child_bed},
+            #{in_price_child_info},
+            #{in_price_tip_num},
+            #{in_price_tip_info},
+            #{in_price_present},
+            #{not_in_price_airport_name},
+            #{not_in_price_airport_path},
+            #{not_in_price_airport_num},
+            #{not_in_price_out_airport_num},
+            #{not_in_price_visa_num},
+            #{not_in_price_if_single_visa},
+            #{not_in_price_if_group_visa},
+            #{not_in_price_if_got_visa},
+            #{not_in_price_if_tai_visa},
+            #{not_in_price_selt_place},
+            #{notice_pay_hour},
+            #{notice_less_num},
+            #{notice_less_days},
+            #{notice_leave_self_money},
+            #{notice_note},
+            #{notice_visa_self},
+            #{notice_append},
+            #{notice_item1},
+            #{notice_item2},
+            #{notice_item3},
+            #{notice_item4},
+            #{notice_item5},
+            #{notice_item6},
+            #{notice_item7},
+            #{notice_item8},
+            #{if_promotion},
+            #{in_price_visa_type},
+            #{in_price_hotel_type},
+            #{in_price_meal_type},
+            #{in_price_guide_type},
+            #{in_price_child_type},
+            #{not_in_price_visa_type},
+            #{notice_pay_type},
+            #{notice_leave_self},
+            #{notice_gat},
+            #{not_in_price_supply4},
+            #{not_in_price_supply3},
+            #{not_in_price_supply2},
+            #{not_in_price_supply1},
+            #{not_in_price_if_safe},
+            #{transportation_way},
+            #{sure_plane},
+            #{sure_bus},
+            #{notice_if_need},
+            #{not_in_price_if_plane},
+            #{not_in_price_if_out_plane},
+            #{not_in_price_if_room},
+            #{not_in_price_if_self_place},
+            #{if_headline_one},
+            #{if_headline_two},
+            #{if_headline_three},
+            #{circuit_info_mark},
+            #{join_info_remark},
+            #{not_in_price_single_room},
+            #{feature_describe},
+            #{eat},
+            #{reside},
+            #{walk},
+            #{travel},
+            #{recreation},
+            #{reco_buy},
+            #{present},
+            #{special_offer},
+            #{significance_prompt},
+            #{traffic_information},
+            #{in_price_other},
+            #{not_in_price_other},
+            #{announcement},
+            #{warm_prompt},
+            #{recommend_detail},
+            #{default_line},
+            #{if_small},
+            #{in_price_user_defined},
+            #{not_in_price_user_defined})
+    </insert>
+
+    <insert id="insertProductActivity" parameterType="java.util.List">
+
+        INSERT INTO scm_product_activity
+            (product_id,
+            activity_name,
+            detail,
+            remark,
+            price)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.product_id},
+            #{item.activity_name},
+            #{item.detail},
+            #{item.remark},
+            #{item.price})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductDS" parameterType="java.util.List">
+
+        INSERT INTO scm_product_detail_shopp
+            (product_id,
+            shop_id,
+            shop_name,
+            main_product,
+            shop_info)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.product_id},
+            #{item.shop_id},
+            #{item.shop_name},
+            #{item.main_product},
+            #{item.shop_info})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductDV" parameterType="com.ykly.entity.product.ProductDV">
+
+        INSERT INTO scm_product_detail_visa
+            (product_id,
+            identity_type,
+            if_el,
+            material,
+            detail_info)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.product_id},
+            #{item.identity_type},
+            #{item.if_el},
+            #{item.material},
+            #{item.detail_info})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductTrip" useGeneratedKeys="true" keyProperty="trip_id" parameterType="com.ykly.entity.product.ProductTrip">
+
+        INSERT INTO scm_product_trip
+            (product_id,
+            trip_title,
+            breakfast,
+            lunch,
+            dinner,
+            trip_stay,
+            create_date,
+            update_date,
+            trip_days,
+            trip_describe)
+        VALUES
+            (#{product_id},
+            #{trip_title},
+            #{breakfast},
+            #{lunch},
+            #{dinner},
+            #{trip_stay},
+            now(),
+            now(),
+            #{trip_days},
+            #{trip_describe})
+    </insert>
+
+    <insert id="insertProductGO" parameterType="java.util.List">
+
+        INSERT INTO scm_product_groupoffer
+            (adult_out_price,
+            child_out_price,
+            adult_peer_price,
+            child_peer_price,
+            single_room_dif,
+            deposit,
+            reg_able_start,
+            reg_able_end,
+            reg_able_end_hour,
+            material_able,
+            stock,
+            stock_warn,
+            product_id,
+            create_time,
+            update_time,
+            discount,
+            price,
+            status,
+            group_date,
+            other_peer_price,
+            pre_single_room_dif,
+            clean_time_hour,
+            clean_time,
+            first_stock,
+            ifsure,
+            tripid,
+            ifdeposit,
+            ifsingle,
+            adult_out_onsale_price,
+            child_out_onsale_price,
+            group_no)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.adult_out_price},
+            #{item.child_out_price},
+            #{item.adult_peer_price},
+            #{item.child_peer_price},
+            #{item.single_room_dif},
+            #{item.deposit},
+            #{item.reg_able_start},
+            #{item.reg_able_end},
+            #{item.reg_able_end_hour},
+            #{item.material_able},
+            #{item.stock},
+            #{item.stock_warn},
+            #{item.product_id},
+            now(),
+            now(),
+            #{item.discount},
+            #{item.price},
+            #{item.status},
+            str_to_date(#{item.group_date},'%Y-%m-%d'),
+            #{item.other_peer_price},
+            #{item.pre_single_room_dif},
+            #{item.clean_time_hour},
+            #{item.clean_time},
+            #{item.first_stock},
+            #{item.ifsure},
+            #{item.tripid},
+            #{item.ifdeposit},
+            #{item.ifsingle},
+            #{item.adult_out_onsale_price},
+            #{item.child_out_onsale_price},
+            #{item.group_no})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductSM" parameterType="java.util.List">
+
+        INSERT INTO scm_product_storemanager
+            (productid,
+            groupdate,
+            instore,
+            seat,
+            signed,
+            warn,
+            shareid)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.productid},
+            str_to_date(#{item.groupdate},'%Y-%m-%d'),
+            #{item.instore},
+            #{item.seat},
+            #{item.signed},
+            #{item.warn},
+            #{item.shareid})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductGP" parameterType="java.util.List">
+
+        INSERT INTO scm_product_groupprice
+            (groupid,
+            pricename,
+            price,
+            productid,
+            tripcode,
+            outprice)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.groupid},
+            #{item.pricename},
+            #{item.price},
+            #{item.productid},
+            #{item.tripcode},
+            #{item.outprice})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductDetailTraffic" parameterType="java.util.List">
+
+        INSERT INTO scm_product_detail_traffic
+            (product_id,
+            traffic_type,
+            tax_type,
+            site_type,
+            traffic_path)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.product_id},
+            #{item.traffic_type},
+            #{item.tax_type},
+            #{item.site_type},
+            #{item.traffic_path})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductDTI" parameterType="com.ykly.entity.product.ProductDTI">
+
+        INSERT INTO scm_product_detail_trip_img
+            (place_name,
+            last_id,
+            chip_id,
+            img_url,
+            img_name)
+        VALUES
+            (#{place_name},
+            #{last_id},
+            #{chip_id},
+            #{img_url},
+            #{img_name})
+    </insert>
+
+    <insert id="insertProductDH" parameterType="java.util.List">
+
+        INSERT INTO scm_product_detail_hotel
+            (product_id,
+            hotel_name,
+            hotel_people,
+            hotel_days)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.product_id},
+            #{item.hotel_name},
+            #{item.hotel_people},
+            #{item.hotel_days})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductDA" parameterType="java.util.List">
+
+        INSERT INTO scm_product_detail_area
+            (product_id,
+            area_type,
+            province_id,
+            city_id)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.product_id},
+            #{item.area_type},
+            #{item.province_id},
+            #{item.city_id})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductBenefit" parameterType="java.util.List">
+
+        INSERT INTO scm_product_benefit
+            (benefitcrowd,
+            benefitnote,
+            benefitnumber,
+            productid)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.benefitcrowd},
+            #{item.benefitnote},
+            #{item.benefitnumber},
+            #{item.productid})
+        </foreach>
+    </insert>
+</mapper>

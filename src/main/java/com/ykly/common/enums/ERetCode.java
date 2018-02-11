@@ -93,6 +93,7 @@ public enum ERetCode {
     /* 4开头 - 数据相关错误*/
     CINEMA_NOTEXIST(4001, "影院不存在 -_-#"),
     
+    CERTIFICATION_NOT_PASS(5001, "认证没通过 -_-#"),
     /* 9999 - 为定义错误 */
     UNKNOWN(9999, "未知错误 Q_Q");
     
