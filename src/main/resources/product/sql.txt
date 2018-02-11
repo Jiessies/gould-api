@@ -1,0 +1,52 @@
+# 节日
+SELECT * FROM scm_param_product_holiday;
+# 主题
+SELECT * FROM scm_param_product_subject;
+# 供应商产品类型（线路玩法） 第一个框
+SELECT * FROM scm_param_product_ltype;
+# 供应商产品类型（线路玩法）第二个框
+SELECT * FROM scm_param_product_stype;
+#	出发城市、成团地点 预定城市
+SELECT * FROM scm_param_city;
+#	目的地城市
+SELECT * FROM scm_param_place;
+# 指定代理商 (公司名称、账号、手机号)
+SELECT * FROM mgr_user;
+
+
+select COLUMN_NAME,COLUMN_COMMENT,COLUMN_TYPE from INFORMATION_SCHEMA.Columns where table_name='scm_product_benefit';
+
+SELECT *,first_pic FROM scm_product_pic WHERE product_id = 20;
+# 2、	跟团游主信息
+SELECT *,agency_id FROM scm_product_info WHERE product_id = 20;
+# 3、	详情信息
+SELECT * FROM scm_product_detail WHERE product_id = 20;
+# 4、	行程主信息
+SELECT * FROM scm_product_detail_trip WHERE product_id = 20;
+# 5、	行程详细信息
+SELECT * FROM scm_product_trip WHERE product_id = 20;
+# 6、	行程段信息
+SELECT * FROM scm_product_detail_tripchip WHERE trip_id = 16;
+# 行程信息图片表
+SELECT * FROM scm_product_detail_trip_img WHERE chip_id = 14;
+# 18团期报价(价格单位为元)：团期表
+SELECT * FROM scm_product_groupoffer WHERE product_id = 20;
+# 库存表
+SELECT * FROM scm_product_storemanager WHERE productid = 20;
+# 特殊人群报价
+SELECT * FROM scm_product_groupprice WHERE productid = 20;
+#特殊客户优惠
+SELECT * FROM scm_product_benefit WHERE productid = 20;
+
+#费用包含-交通
+SELECT * FROM scm_product_detail_traffic WHERE product_id = 20;
+#费用包含-住宿
+SELECT * FROM scm_product_detail_hotel WHERE product_id = 20;
+#特殊人群限制-区域限制
+SELECT * FROM scm_product_detail_area WHERE product_id = 20;
+#产品活动
+SELECT * FROM scm_product_activity WHERE product_id = 20;
+#产品推荐
+SELECT * FROM scm_product_detail_shopp WHERE product_id = 20;
+#签证产品详情
+SELECT * FROM scm_product_detail_visa WHERE product_id = 20;
