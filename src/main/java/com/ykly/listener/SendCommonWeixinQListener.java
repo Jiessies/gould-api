@@ -22,13 +22,15 @@ public class SendCommonWeixinQListener implements ChannelAwareMessageListener {
     
     @Override
     public void onMessage(Message message, Channel channel) {
+        Boolean subType = true;
         try {
             GeoCoding geoCoding = JSON.parseObject(message.getBody(), GeoCoding.class);
             logger.info("json string is:{}", geoCoding);
         } catch (Throwable e) {
+            subType = false;
             logger.error("SendCommonSmsQListener sss process message failed", e);
         } finally {
-            mqHelper.sendAck(message, channel);
+            mqHelper.sendAck(message, channel, subType);
         }
     }
 }

@@ -20,13 +20,15 @@ public class JiessieListener implements ChannelAwareMessageListener {
     
     @Override
     public void onMessage(Message message, Channel channel) throws Exception {
+        boolean subType = true;
         try {
             String jsonStr = new String(message.getBody());
             logger.info("=======>"+jsonStr);
         } catch (Throwable e) {
+            subType = false;
             logger.error("SendCommonSmsQListener xxttttx process message failed", e);
         } finally {
-            mqHelper.sendAck(message, channel);
+            mqHelper.sendAck(message, channel, subType);
         }
     }
 }

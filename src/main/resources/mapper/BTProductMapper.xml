@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ykly.mapper.BTProductMapper">
+
+    <insert id="insertProductMainInfo" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ykly.entity.product.info.BTProductMainInfo">
+
+        INSERT INTO yk_main_product_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                product_id,
+            </if>
+            <if test="product_type != null">
+                product_type,
+            </if>
+            <if test="supplier_num != null">
+                supplier_num,
+            </if>
+            <if test="supplier_product_name != null">
+                supplier_product_name,
+            </if>
+            <if test="supplier_name != null">
+                supplier_name,
+            </if>
+            <if test="yk_num != null">
+                yk_num,
+            </if>
+            <if test="yk_festival_name != null">
+                yk_festival_name,
+            </if>
+            <if test="product_name_fir != null">
+                product_name_fir,
+            </if>
+            <if test="product_name_last != null">
+                product_name_last,
+            </if>
+            <if test="yk_theme_id != null">
+                yk_theme_id,
+            </if>
+            <if test="yk_theme_name != null">
+                yk_theme_name,
+            </if>
+            <if test="home_abroad != null">
+                home_abroad,
+            </if>
+            <if test="start_city_id != null">
+                start_city_id,
+            </if>
+            <if test="start_city_name != null">
+                start_city_name,
+            </if>
+            <if test="destination_city_id != null">
+                destination_city_id,
+            </if>
+            <if test="destination != null">
+                destination,
+            </if>
+            <if test="group_position_id != null">
+                group_position_id,
+            </if>
+            <if test="group_position != null">
+                group_position,
+            </if>
+            <if test="client_city_id != null">
+                client_city_id,
+            </if>
+            <if test="agency_city_id != null">
+                agency_city_id,
+            </if>
+            <if test="agency_id != null">
+                agency_id,
+            </if>
+            <if test="create_user_id != null">
+                create_user_id,
+            </if>
+            <if test="give_time != null">
+                give_time,
+            </if>
+            <if test="vendor_id != null">
+                vendor_id,
+            </if>
+            <if test="yk_director_id != null">
+                yk_director_id,
+            </if>
+            <if test="principal != null">
+                principal,
+            </if>
+            <if test="feature != null">
+                feature,
+            </if>
+            <if test="product_pic != null">
+                product_pic,
+            </if>
+            <if test="info_word != null">
+                info_word,
+            </if>
+            <if test="online_status != null">
+                online_status,
+            </if>
+            <if test="submit_status != null">
+                submit_status,
+            </if>
+            <if test="auto_audit_status != null">
+                auto_audit_status,
+            </if>
+            <if test="operation_status != null">
+                operation_status,
+            </if>
+            <if test="audit_date != null">
+                audit_date,
+            </if>
+            <if test="back_reason != null">
+                back_reason,
+            </if>
+            <if test="activity_sales != null">
+                activity_sales,
+            </if>
+            <if test="create_date != null">
+                create_date,
+            </if>
+            <if test="update_date != null">
+                update_date,
+            </if>
+            <if test="is_del != null">
+                is_del,
+            </if>
+            <if test="vendor_company_id != null">
+                vendor_company_id
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+            <if test="product_type != null">
+                #{product_type},
+            </if>
+            <if test="supplier_num != null">
+                #{supplier_num},
+            </if>
+            <if test="supplier_product_name != null">
+                #{supplier_product_name},
+            </if>
+            <if test="supplier_name != null">
+                #{supplier_name},
+            </if>
+            <if test="yk_num != null">
+                #{yk_num},
+            </if>
+            <if test="yk_festival_name != null">
+                #{yk_festival_name},
+            </if>
+            <if test="product_name_fir != null">
+                #{product_name_fir},
+            </if>
+            <if test="product_name_last != null">
+                #{product_name_last},
+            </if>
+            <if test="yk_theme_id != null">
+                #{yk_theme_id},
+            </if>
+            <if test="yk_theme_name != null">
+                #{yk_theme_name},
+            </if>
+            <if test="home_abroad != null">
+                #{home_abroad},
+            </if>
+            <if test="start_city_id != null">
+                #{start_city_id},
+            </if>
+            <if test="start_city_name != null">
+                #{start_city_name},
+            </if>
+            <if test="destination_city_id != null">
+                #{destination_city_id},
+            </if>
+            <if test="destination != null">
+                #{destination},
+            </if>
+            <if test="group_position_id != null">
+                #{group_position_id},
+            </if>
+            <if test="group_position != null">
+                #{group_position},
+            </if>
+            <if test="client_city_id != null">
+                #{client_city_id},
+            </if>
+            <if test="agency_city_id != null">
+                #{agency_city_id},
+            </if>
+            <if test="agency_id != null">
+                #{agency_id},
+            </if>
+            <if test="create_user_id != null">
+                #{create_user_id},
+            </if>
+            <if test="give_time != null">
+                #{give_time},
+            </if>
+            <if test="vendor_id != null">
+                #{vendor_id},
+            </if>
+            <if test="yk_director_id != null">
+                #{yk_director_id},
+            </if>
+            <if test="principal != null">
+                #{principal},
+            </if>
+            <if test="feature != null">
+                #{feature},
+            </if>
+            <if test="product_pic != null">
+                #{product_pic},
+            </if>
+            <if test="info_word != null">
+                #{info_word},
+            </if>
+            <if test="online_status != null">
+                #{online_status},
+            </if>
+            <if test="submit_status != null">
+                #{submit_status},
+            </if>
+            <if test="auto_audit_status != null">
+                #{auto_audit_status},
+            </if>
+            <if test="operation_status != null">
+                #{operation_status},
+            </if>
+            <if test="audit_date != null">
+                #{audit_date},
+            </if>
+            <if test="back_reason != null">
+                #{back_reason},
+            </if>
+            <if test="activity_sales != null">
+                #{activity_sales},
+            </if>
+            <if test="create_date != null">
+                #{create_date},
+            </if>
+            <if test="update_date != null">
+                #{update_date},
+            </if>
+            <if test="is_del != null">
+                #{is_del},
+            </if>
+            <if test="vendor_company_id != null">
+                #{vendor_company_id}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertProductSupplementaryInfo" parameterType="com.ykly.entity.product.info.BTProductSupplementaryInfo">
+
+        INSERT INTO yk_product_supplementary_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                product_id,
+            </if>
+            <if test="product_type != null">
+                product_type,
+            </if>
+            <if test="group_people_num != null">
+                group_people_num,
+            </if>
+            <if test="product_ltype_id != null">
+                product_ltype_id,
+            </if>
+            <if test="product_ltype_name != null">
+                product_ltype_name,
+            </if>
+            <if test="product_stype_id != null">
+                product_stype_id,
+            </if>
+            <if test="product_stype_name != null">
+                product_stype_name,
+            </if>
+            <if test="is_del != null">
+                is_del
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+            <if test="product_type != null">
+                #{product_type},
+            </if>
+            <if test="group_people_num != null">
+                #{group_people_num},
+            </if>
+            <if test="product_ltype_id != null">
+                #{product_ltype_id},
+            </if>
+            <if test="product_ltype_name != null">
+                #{product_ltype_name},
+            </if>
+            <if test="product_stype_id != null">
+                #{product_stype_id},
+            </if>
+            <if test="product_stype_name != null">
+                #{product_stype_name},
+            </if>
+            <if test="is_del != null">
+                #{is_del}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertProductTrip" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.ykly.entity.product.info.BTProductTrip">
+
+        INSERT INTO yk_product_trip
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                product_id,
+            </if>
+            <if test="product_type != null">
+                product_type,
+            </if>
+            <if test="trip_code != null">
+                trip_code,
+            </if>
+            <if test="supply_code != null">
+                supply_code,
+            </if>
+            <if test="trip_feature != null">
+                trip_feature,
+            </if>
+            <if test="file_path != null">
+                file_path,
+            </if>
+            <if test="trip_days != null">
+                trip_days,
+            </if>
+            <if test="trip_nights != null">
+                trip_nights,
+            </if>
+            <if test="img_path != null">
+                img_path,
+            </if>
+            <if test="is_default != null">
+                is_default,
+            </if>
+            <if test="startingPointTraffic != null">
+                startingPointTraffic,
+            </if>
+            <if test="returnTripTraffic != null">
+                returnTripTraffic,
+            </if>
+            <if test="journey_annotation != null">
+                journey_annotation,
+            </if>
+            <if test="circuit_journey != null">
+                circuit_journey,
+            </if>
+            <if test="create_date != null">
+                create_date,
+            </if>
+            <if test="update_date != null">
+                update_date,
+            </if>
+            <if test="is_del != null">
+                is_del,
+            </if>
+            <if test="file_name != null">
+                file_name
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+            <if test="product_type != null">
+                #{product_type},
+            </if>
+            <if test="trip_code != null">
+                #{trip_code},
+            </if>
+            <if test="supply_code != null">
+                #{supply_code},
+            </if>
+            <if test="trip_feature != null">
+                #{trip_feature},
+            </if>
+            <if test="file_path != null">
+                #{file_path},
+            </if>
+            <if test="trip_days != null">
+                #{trip_days},
+            </if>
+            <if test="trip_nights != null">
+                #{trip_nights},
+            </if>
+            <if test="img_path != null">
+                #{img_path},
+            </if>
+            <if test="is_default != null">
+                #{is_default},
+            </if>
+            <if test="startingPointTraffic != null">
+                #{startingPointTraffic},
+            </if>
+            <if test="returnTripTraffic != null">
+                #{returnTripTraffic},
+            </if>
+            <if test="journey_annotation != null">
+                #{journey_annotation},
+            </if>
+            <if test="circuit_journey != null">
+                #{circuit_journey},
+            </if>
+            <if test="create_date != null">
+                #{create_date},
+            </if>
+            <if test="update_date != null">
+                #{update_date},
+            </if>
+            <if test="is_del != null">
+                #{is_del},
+            </if>
+            <if test="file_name != null">
+                #{file_name}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertProductTripDays" useGeneratedKeys="true" keyProperty="day_id"
+            parameterType="com.ykly.entity.product.info.BTProductTripDays">
+
+        INSERT INTO yk_product_trip_days
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                product_id,
+            </if>
+            <if test="trip_title != null">
+                trip_title,
+            </if>
+            <if test="breakfast != null">
+                breakfast,
+            </if>
+            <if test="lunch != null">
+                lunch,
+            </if>
+            <if test="dinner != null">
+                dinner,
+            </if>
+            <if test="trip_stay != null">
+                trip_stay,
+            </if>
+            <if test="create_date != null">
+                create_date,
+            </if>
+            <if test="update_date != null">
+                update_date,
+            </if>
+            <if test="trip_days != null">
+                trip_days,
+            </if>
+            <if test="trip_describe != null">
+                trip_describe,
+            </if>
+            <if test="trip_id != null">
+                trip_id
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+            <if test="trip_title != null">
+                #{trip_title},
+            </if>
+            <if test="breakfast != null">
+                #{breakfast},
+            </if>
+            <if test="lunch != null">
+                #{lunch},
+            </if>
+            <if test="dinner != null">
+                #{dinner},
+            </if>
+            <if test="trip_stay != null">
+                #{trip_stay},
+            </if>
+            <if test="create_date != null">
+                #{create_date},
+            </if>
+            <if test="update_date != null">
+                #{update_date},
+            </if>
+            <if test="trip_days != null">
+                #{trip_days},
+            </if>
+            <if test="trip_describe != null">
+                #{trip_describe},
+            </if>
+            <if test="trip_id != null">
+                #{trip_id}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertProductTripChips" parameterType="java.util.List">
+
+        INSERT INTO yk_product_trip_chips
+        (day_id,
+        trip_info,
+        trip_title,
+        trip_content,
+        trip_time,
+        chip_order)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.day_id},
+            #{item.trip_info},
+            #{item.trip_title},
+            #{item.trip_content},
+            #{item.trip_time},
+            #{item.chip_order})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductTripShops" parameterType="java.util.List">
+
+        INSERT INTO yk_product_trip_shops
+        (day_id,
+        shop_name,
+        shop_product,
+        shop_explian,
+        shop_id,
+        stay_time)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.day_id},
+            #{item.shop_name},
+            #{item.shop_product},
+            #{item.shop_explian},
+            #{item.shop_id},
+            #{item.stay_time})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductDetailRecommend" parameterType="com.ykly.entity.product.detail.BTProductDetailRecommend">
+
+        INSERT INTO yk_product_detail_activity_recommend
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                product_id,
+            </if>
+            <if test="product_type != null">
+                product_type,
+            </if>
+            <if test="feature_describe != null">
+                feature_describe,
+            </if>
+            <if test="recommend_detail != null">
+                recommend_detail,
+            </if>
+            <if test="eat != null">
+                eat,
+            </if>
+            <if test="reside != null">
+                reside,
+            </if>
+            <if test="walk != null">
+                walk,
+            </if>
+            <if test="travel != null">
+                travel,
+            </if>
+            <if test="recreation != null">
+                recreation,
+            </if>
+            <if test="reco_buy != null">
+                reco_buy,
+            </if>
+            <if test="present != null">
+                present,
+            </if>
+            <if test="special_offer != null">
+                special_offer,
+            </if>
+            <if test="significance_prompt != null">
+                significance_prompt,
+            </if>
+            <if test="traffic_information != null">
+                traffic_information,
+            </if>
+            <if test="create_date != null">
+                create_date,
+            </if>
+            <if test="update_date != null">
+                update_date,
+            </if>
+            <if test="is_del != null">
+                is_del
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+            <if test="product_type != null">
+                #{product_type},
+            </if>
+            <if test="feature_describe != null">
+                #{feature_describe},
+            </if>
+            <if test="recommend_detail != null">
+                #{recommend_detail},
+            </if>
+            <if test="eat != null">
+                #{eat},
+            </if>
+            <if test="reside != null">
+                #{reside},
+            </if>
+            <if test="walk != null">
+                #{walk},
+            </if>
+            <if test="travel != null">
+                #{travel},
+            </if>
+            <if test="recreation != null">
+                #{recreation},
+            </if>
+            <if test="reco_buy != null">
+                #{reco_buy},
+            </if>
+            <if test="present != null">
+                #{present},
+            </if>
+            <if test="special_offer != null">
+                #{special_offer},
+            </if>
+            <if test="significance_prompt != null">
+                #{significance_prompt},
+            </if>
+            <if test="traffic_information != null">
+                #{traffic_information},
+            </if>
+            <if test="create_date != null">
+                #{create_date},
+            </if>
+            <if test="update_date != null">
+                #{update_date},
+            </if>
+            <if test="is_del != null">
+                #{is_del}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertProductDeatilInfo" parameterType="com.ykly.entity.product.detail.BTProductDetailInfo">
+
+        INSERT INTO yk_product_detail_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                product_id,
+            </if>
+            <if test="product_type != null">
+                product_type,
+            </if>
+            <if test="import_start_off_site != null">
+                import_start_off_site,
+            </if>
+            <if test="import_cluster_modality != null">
+                import_cluster_modality,
+            </if>
+            <if test="import_yes_no_cluster != null">
+                import_yes_no_cluster,
+            </if>
+            <if test="import_add_ons != null">
+                import_add_ons,
+            </if>
+            <if test="inprice_traffic_info != null">
+                inprice_traffic_info,
+            </if>
+            <if test="inprice_small_traffic_info != null">
+                inprice_small_traffic_info,
+            </if>
+            <if test="inprice_visa_info != null">
+                inprice_visa_info,
+            </if>
+            <if test="inprice_stay_info != null">
+                inprice_stay_info,
+            </if>
+            <if test="inprice_meal_info != null">
+                inprice_meal_info,
+            </if>
+            <if test="inprice_ticket_info != null">
+                inprice_ticket_info,
+            </if>
+            <if test="inprice_guide_info != null">
+                inprice_guide_info,
+            </if>
+            <if test="inprice_child_info != null">
+                inprice_child_info,
+            </if>
+            <if test="inprice_tip_info != null">
+                inprice_tip_info,
+            </if>
+            <if test="">
+                inprice_present_info,
+            </if>
+            <if test="inprice_present_info != null">
+                inprice_other_info,
+            </if>
+            <if test="inprice_userdefine_info != null">
+                inprice_userdefine_info,
+            </if>
+            <if test="not_inprice_small_traffic_info != null">
+                not_inprice_small_traffic_info,
+            </if>
+            <if test="not_inprice_airticket_tax_info != null">
+                not_inprice_airticket_tax_info,
+            </if>
+            <if test="not_inprice_visa_info != null">
+                not_inprice_visa_info,
+            </if>
+            <if test="not_inprice_singleroom_info != null">
+                not_inprice_singleroom_info,
+            </if>
+            <if test="not_inprice_ticket_info != null">
+                not_inprice_ticket_info,
+            </if>
+            <if test="not_inprice_other_info != null">
+                not_inprice_other_info,
+            </if>
+            <if test="not_inprice_add_ons_info != null">
+                not_inprice_add_ons_info,
+            </if>
+            <if test="not_inprice_if_safe != null">
+                not_inprice_if_safe,
+            </if>
+            <if test="not_inprice_userdefine_info != null">
+                not_inprice_userdefine_info,
+            </if>
+            <if test="special_people_info != null">
+                special_people_info,
+            </if>
+            <if test="create_date != null">
+                create_date,
+            </if>
+            <if test="update_date != null">
+                update_date,
+            </if>
+            <if test="is_del != null">
+                is_del
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+            <if test="product_type != null">
+                #{product_type},
+            </if>
+            <if test="import_start_off_site != null">
+                #{import_start_off_site},
+            </if>
+            <if test="import_cluster_modality != null">
+                #{import_cluster_modality},
+            </if>
+            <if test="import_yes_no_cluster != null">
+                #{import_yes_no_cluster},
+            </if>
+            <if test="import_add_ons != null">
+                #{import_add_ons},
+            </if>
+            <if test="inprice_traffic_info != null">
+                #{inprice_traffic_info},
+            </if>
+            <if test="inprice_small_traffic_info != null">
+                #{inprice_small_traffic_info},
+            </if>
+            <if test="inprice_visa_info != null">
+                #{inprice_visa_info},
+            </if>
+            <if test="inprice_stay_info != null">
+                #{inprice_stay_info},
+            </if>
+            <if test="inprice_meal_info != null">
+                #{inprice_meal_info},
+            </if>
+            <if test="inprice_ticket_info != null">
+                #{inprice_ticket_info},
+            </if>
+            <if test="inprice_guide_info != null">
+                #{inprice_guide_info},
+            </if>
+            <if test="inprice_child_info != null">
+                #{inprice_child_info},
+            </if>
+            <if test="inprice_tip_info != null">
+                #{inprice_tip_info},
+            </if>
+            <if test="">
+                #{inprice_present_info},
+            </if>
+            <if test="inprice_present_info != null">
+                #{inprice_other_info},
+            </if>
+            <if test="inprice_userdefine_info != null">
+                #{inprice_userdefine_info},
+            </if>
+            <if test="not_inprice_small_traffic_info != null">
+                #{not_inprice_small_traffic_info},
+            </if>
+            <if test="not_inprice_airticket_tax_info != null">
+                #{not_inprice_airticket_tax_info},
+            </if>
+            <if test="not_inprice_visa_info != null">
+                #{not_inprice_visa_info},
+            </if>
+            <if test="not_inprice_singleroom_info != null">
+                #{not_inprice_singleroom_info},
+            </if>
+            <if test="not_inprice_ticket_info != null">
+                #{not_inprice_ticket_info},
+            </if>
+            <if test="not_inprice_other_info != null">
+                #{not_inprice_other_info},
+            </if>
+            <if test="not_inprice_add_ons_info != null">
+                #{not_inprice_add_ons_info},
+            </if>
+            <if test="not_inprice_if_safe != null">
+                #{not_inprice_if_safe},
+            </if>
+            <if test="not_inprice_userdefine_info != null">
+                #{not_inprice_userdefine_info},
+            </if>
+            <if test="special_people_info != null">
+                #{special_people_info},
+            </if>
+            <if test="create_date != null">
+                #{create_date},
+            </if>
+            <if test="update_date != null">
+                #{update_date},
+            </if>
+            <if test="is_del != null">
+                #{is_del}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertProductDetailOther" parameterType="com.ykly.entity.product.detail.BTProductDetailOther">
+
+        INSERT INTO yk_product_detail_recommend
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                product_id,
+            </if>
+            <if test="product_type != null">
+                product_type,
+            </if>
+            <if test="activity_recommend != null">
+                activity_recommend,
+            </if>
+            <if test="shop_recommend != null">
+                shop_recommend,
+            </if>
+            <if test="explain_textbox != null">
+                explain_textbox,
+            </if>
+            <if test="announcement != null">
+                announcement,
+            </if>
+            <if test="warm_prompt != null">
+                warm_prompt,
+            </if>
+            <if test="pre_order_info != null">
+                pre_order_info,
+            </if>
+            <if test="pre_order_special_info != null">
+                pre_order_special_info,
+            </if>
+            <if test="pre_order_add_ons_info != null">
+                pre_order_add_ons_info,
+            </if>
+            <if test="visa_info != null">
+                visa_info,
+            </if>
+            <if test="create_date != null">
+                create_date,
+            </if>
+            <if test="update_date != null ">
+                update_date,
+            </if>
+            <if test="is_del != null">
+                is_del
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="product_id != null">
+                #{product_id},
+            </if>
+            <if test="product_type != null">
+                #{product_type},
+            </if>
+            <if test="activity_recommend != null">
+                #{activity_recommend},
+            </if>
+            <if test="shop_recommend != null">
+                #{shop_recommend},
+            </if>
+            <if test="explain_textbox != null">
+                #{explain_textbox},
+            </if>
+            <if test="announcement != null">
+                #{announcement},
+            </if>
+            <if test="warm_prompt != null">
+                #{warm_prompt},
+            </if>
+            <if test="pre_order_info != null">
+                #{pre_order_info},
+            </if>
+            <if test="pre_order_special_info != null">
+                #{pre_order_special_info},
+            </if>
+            <if test="pre_order_add_ons_info != null">
+                #{pre_order_add_ons_info},
+            </if>
+            <if test="visa_info != null">
+                #{visa_info},
+            </if>
+            <if test="create_date != null">
+                #{create_date},
+            </if>
+            <if test="update_date != null ">
+                #{update_date},
+            </if>
+            <if test="is_del != null">
+                #{is_del}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertProductGroupOffer" parameterType="java.util.List">
+
+        INSERT INTO yk_product_groupoffer
+        (product_id,
+        tripid,
+        year,
+        month,
+        day,
+        groupdate,
+        adult_out_price,
+        adult_peer_price,
+        child_out_price,
+        child_peer_price,
+        single_room_dif,
+        deposit,
+        reg_able_start,
+        material_able,
+        material_end,
+        product_type,
+        is_delete,
+        is_share,
+        is_other_price,
+        is_sure,
+        share_stockid,
+        createtime,
+        updatetime,
+        groupdate_start,
+        groupdate_end,
+        clean_time,
+        stock,
+        warn,
+        seat,
+        remain,
+        signed,
+        is_deposit,
+        is_single,
+        reg_able_end_day,
+        reg_able_end_hour,
+        clean_time_day,
+        clean_time_hour,
+        scenic_Price_Id,
+        reg_able_start_day,
+        tuan_no)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{product_id},
+            #{tripid},
+            #{year},
+            #{month},
+            #{day},
+            #{groupdate},
+            #{adult_out_price},
+            #{adult_peer_price},
+            #{child_out_price},
+            #{child_peer_price},
+            #{single_room_dif},
+            #{deposit},
+            #{reg_able_start},
+            #{material_able},
+            #{material_end},
+            #{product_type},
+            #{is_delete},
+            #{is_share},
+            #{is_other_price},
+            #{is_sure},
+            #{share_stockid},
+            #{createtime},
+            #{updatetime},
+            #{groupdate_start},
+            #{groupdate_end},
+            #{clean_time},
+            #{stock},
+            #{warn},
+            #{seat},
+            #{remain},
+            #{signed},
+            #{is_deposit},
+            #{is_single},
+            #{reg_able_end_day},
+            #{reg_able_end_hour},
+            #{clean_time_day},
+            #{clean_time_hour},
+            #{scenic_Price_Id},
+            #{reg_able_start_day},
+            #{tuan_no})
+        </foreach>
+    </insert>
+
+    <insert id="insertProductSpecialPrice" parameterType="java.util.List">
+        INSERT INTO
+        (product_id,
+        product_type,
+        groupoffer_id,
+        trip_code,
+        price_name,
+        peer_price,
+        out_price,
+        is_del)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{product_id},
+            #{product_type},
+            #{groupoffer_id},
+            #{trip_code},
+            #{price_name},
+            #{peer_price},
+            #{out_price},
+            #{is_del})
+        </foreach>
+    </insert>
+</mapper>

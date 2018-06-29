@@ -19,13 +19,15 @@ public class SendCommonSmsQListener implements ChannelAwareMessageListener {
     
     @Override
     public void onMessage(Message message, Channel channel) {
+        Boolean subType = true;
         try {
             String jsonStr = new String(message.getBody());
             logger.info(jsonStr);
         } catch (Throwable e) {
+            subType = false;
             logger.error("SendCommonSmsQListener xxx process message failed", e);
         } finally {
-            mqHelper.sendAck(message, channel);
+            mqHelper.sendAck(message, channel, subType);
         }
     }
 }
