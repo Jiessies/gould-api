@@ -164,5 +164,10 @@ public class GouldController {
     public String redisLock(@PathVariable String key, @PathVariable String value) {
         return gouldService.redisLock(key, value);
     }
+    
+    @GetMapping("/sendDelayMq/{orderNo}")
+    public String sendDelayMq(@PathVariable String orderNo) {
+        return testMqService.sendDelayQueue(orderNo);
+    }
     //@Validated 单参数校验不正确
 }

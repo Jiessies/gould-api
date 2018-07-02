@@ -6,4 +6,5 @@ package com.ykly.mq;
 public interface TestMqConst {
     String CommonSmsQ = "ofuSendCommonSmsQ";
     String CommonWeixinQ = "ofuSendCommonWeixinQ";
+    String DelayQueue = "delay_queue";
 }

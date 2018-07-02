@@ -34,6 +34,13 @@ public class TestMqServiceImpl implements TestMqService{
         return "succ";
     }
     
+    @Override
+    public String sendDelayQueue(Object obj) {
+        logger.info("order.type is 24 send delay_queue, jobAddReq:{}",obj);
+        amqpTemplate.convertAndSend(TestMqConst.DelayQueue,obj);
+        return "DelaySuccess";
+    }
+    
     private GeoCoding getGeoCoding(){
         GeoCoding geoCoding = new GeoCoding();
         geoCoding.setAddress("北京");
