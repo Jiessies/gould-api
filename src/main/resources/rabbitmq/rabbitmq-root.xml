@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/rabbit
+		http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd">
+
+
+    <rabbit:connection-factory id="connectionFactory" host="${rabbitmq.address}" port="${rabbitmq.port}"
+                               username="${rabbitmq.username}" password="${rabbitmq.password}"
+                               virtual-host="${rabbitmq.virtualHost}"
+                               channel-cache-size="50" executor="mqConnExecutor" connection-factory="rcf"/>
+
+    <task:executor id="mqConnExecutor" pool-size="5-10" queue-capacity="500"/>
+
+    <bean id="rcf" class="com.rabbitmq.client.ConnectionFactory">
+        <!--设置网络异常重连-->
+        <property name="automaticRecoveryEnabled" value="true"/>
+        <!--设置重新声明交换器，队列等信息-->
+        <property name="topologyRecoveryEnabled" value="true"/>
+        <!--设置 每10s ，重试一次-->
+        <property name="networkRecoveryInterval" value="10000"/>
+        <!--链接超时时间-->
+        <property name="connectionTimeout" value="10000"/>
+        <!--设置心跳时间-->
+        <property name="requestedHeartbeat" value="10"/>
+    </bean>
+
+    <rabbit:admin id="rabbitAdmin" connection-factory="connectionFactory"/>
+
+</beans>

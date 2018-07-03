@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/rabbit
+		http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd">
+
+
+    <rabbit:template id="delayTemplate" connection-factory="connectionFactory"
+                     message-converter="jsonMessageConverter"/>
+
+    <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter"/>
+
+    <!-- durable:是否持久化 ；      exclusive: 仅创建者可以使用的私有队列，断开后自动删除；    auto_delete: 当所有消费客户端连接断开后，是否自动删除队列  -->
+    <rabbit:direct-exchange id="exchange_delay" name="exchange_delay" durable="false" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="task_queue"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!-- queue -->
+    <rabbit:queue id="delay_queue" name="delay_queue" auto-declare="true">
+        <rabbit:queue-arguments>
+            <entry key="x-message-ttl" value="5000" value-type="java.lang.Long"/>
+            <entry key="x-dead-letter-exchange" value="exchange_delay"/>
+            <entry key="x-dead-letter-routing-key" value="task_queue"/>
+        </rabbit:queue-arguments>
+    </rabbit:queue>
+
+    <rabbit:queue id="task_queue" name="task_queue" auto-declare="true"/>
+
+    <!-- listener -->
+    <bean id="delayTaskListener" class="com.ykly.listener.DelayListener"/>
+
+    <!-- listener-container -->
+    <rabbit:listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter"
+                               concurrency="5" max-concurrency="10" acknowledge="manual">
+        <rabbit:listener ref="delayTaskListener" method="onMessage"
+                         queue-names="task_queue"/>
+    </rabbit:listener-container>
+
+</beans>

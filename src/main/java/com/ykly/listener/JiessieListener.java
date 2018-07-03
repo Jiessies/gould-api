@@ -12,23 +12,23 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by huangmingjie on 2018/1/15.
  */
 public class JiessieListener implements ChannelAwareMessageListener {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(JiessieListener.class);
-    
+
     @Autowired
     ZoListenerHelper mqHelper;
-    
+
     @Override
     public void onMessage(Message message, Channel channel) throws Exception {
         boolean subType = true;
         try {
             String jsonStr = new String(message.getBody());
-            logger.info("=======>"+jsonStr);
+            logger.info("JiessieListener=======>" + jsonStr);
         } catch (Throwable e) {
             subType = false;
-            logger.error("SendCommonSmsQListener xxttttx process message failed", e);
+            logger.error("JiessieListener xxttttx process message failed", e);
         } finally {
-            mqHelper.sendAck(message, channel, subType);
+//            mqHelper.sendAck(message, channel, subType);
         }
     }
 }
